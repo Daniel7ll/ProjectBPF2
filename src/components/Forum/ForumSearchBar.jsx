@@ -5,8 +5,7 @@ const ForumSearchBar = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   return (
-    <div className="bg-white p-4 shadow-md flex flex-col md:flex-row items-center gap-4">
-      {/* Kategori Diskusi Dropdown */}
+   <div className="sticky top-[72px] z-30 bg-white p-4 shadow-md flex flex-col md:flex-row items-center gap-4 rounded-lg">
       <div className="relative w-full md:w-auto">
         <button
           onClick={() => setIsDropdownOpen(!isDropdownOpen)}

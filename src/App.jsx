@@ -17,15 +17,15 @@ function App() {
     <Suspense fallback={<div>Loading...</div>}> 
       <Routes>  
         <Route element={<GuestLayout/>}>  
-          <Route path="/" element={<Guest />} />  
-          {/* Dynamic error page route */}  
+          <Route path="/guest" element={<Guest />} />  
+          {/* Dynamic error page route  
           {/* <Route path="/error/:code" element={<ErrorPage />} />    
           <Route path="products" element={<Product />} />
           <Route path="/products/:id" element={<ProductDetail />} />  */}
           {/* Auth routes */}  
-        </Route>  
+        </Route>   
         <Route element={<ForumLayout/>}>
-          <Route path="/forum" element={<Forum />} />
+          <Route path="/" element={<Forum />} />
         </Route>
       </Routes>  
     </Suspense>  
