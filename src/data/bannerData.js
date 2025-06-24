@@ -11,12 +11,12 @@ export const bannerData = {
     },
     {
       "id": 2,
-      "imageUrl": "https://via.placeholder.com/1200x200?text=Diskon+Spesial",
+      "imageUrl": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEii0ZCzRUhtcFrDUzBk3dI4OXg4pMXcoE7eeNXRsBWV9Xg1Y58ehlkq5T5eHba21PTTLDmz9tTnjbcx7OGcOlrxmvIk48nZZXMuyj3llP8DyKZKPJ1eZT54VXUmeWjy0nqS93v-QHcRPmo/s1600/10359004_632813033462844_4426913544151621203_o.jpg",
       "altText": "Banner Diskon Spesial Lebaran"
     },
     {
       "id": 3,
-      "imageUrl": "https://via.placeholder.com/1200x200?text=Promo+Terbatas",
+      "imageUrl": "https://3ddf5d7fd7925dee0e85e0f90f634610.cdn.bubble.io/cdn-cgi/image/w=,h=,f=auto,dpr=1,fit=contain/f1725810719774x866964533797845800/NASDEM.png",
       "altText": "Banner Promo Liburan Akhir Tahun"
     }
   ]

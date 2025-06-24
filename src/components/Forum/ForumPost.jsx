@@ -29,40 +29,30 @@ const ForumPost = ({ post }) => {
       </h3>
 
       {/* Area Media (Conditional Rendering: Video atau Gambar) */}
+      {/* Ganti seluruh bagian ini mulai dari <div className="relative w-full ..."> */}
       <div className="relative w-full rounded-lg overflow-hidden mb-4">
-        {type === 'video' ? (
-          // Jika tipe adalah 'video'
-          <>
-            {/* Gambar Thumbnail Video */}
-            <img
-              src={media.thumbnail}
-              alt="Video Thumbnail"
-              className="w-full h-auto object-cover"
-            />
-            {/* Play Button Overlay */}
-            <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-30">
-              <button className="bg-white bg-opacity-80 p-4 rounded-full text-blue-600 hover:bg-opacity-100 transition-colors">
-                <svg className="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clipRule="evenodd"></path></svg>
-              </button>
-            </div>
-            {/* Bottom Overlay Text */}
-            <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black to-transparent text-white">
-              <h4 className="text-lg font-semibold">{media.overlayTitle}</h4>
-              <p className="text-sm">{media.hashtag}</p>
-              <p className="mt-2 text-md font-medium leading-tight">
-                {media.description}
-              </p>
-            </div>
-          </>
-        ) : (
-          // Jika tipe adalah 'image' (atau tipe lainnya yang bukan 'video')
+        {/* Jika tipe video dan ada embedUrl, tampilkan iframe */}
+        {type === 'video' && media.embedUrl ? (
+          <div className="aspect-video w-full h-full">
+            <iframe
+              className="w-full h-full"
+              src={media.embedUrl}
+              title="Embedded YouTube Video"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        ) : type === 'image' && media.imageUrl ? (
+          // Jika gambar
           <img
-            src={media.imageUrl} // Menggunakan imageUrl untuk gambar
+            src={media.imageUrl}
             alt="Post Image"
             className="w-full h-auto object-cover"
           />
-        )}
+        ) : null}
       </div>
+
 
       {/* Footer Interaksi (Icons) */}
       <div className="flex items-center justify-between text-gray-500 text-lg mb-2">

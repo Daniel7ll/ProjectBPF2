@@ -16,7 +16,7 @@ export const forumPosts = [
     timestamp: "Hari ini 08:45",
     caption: "Anak kecil ini jago banget jogetnya",
     media: {
-      thumbnail: "https://via.placeholder.com/800x450?text=Dance+Video",
+      embedUrl: "https://www.youtube.com/embed/wWdwCtEF_3g",
       overlayTitle: "Bikin semua orang ikut joget!",
       hashtag: "#LucuBanget",
       description: "Tonton sampai akhir, gaya jogetnya bikin ngakak!"
