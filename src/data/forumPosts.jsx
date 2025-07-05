@@ -47,9 +47,9 @@ export const forumPosts = [
     },
     author: "citysnap",
     timestamp: "Hari ini 07:15",
-    caption: "Sarapan sederhana di pinggir jalan",
+    caption: "Info beasiswa, mana tau ada yang minat !",
     media: {
-      imageUrl: "https://via.placeholder.com/800x450?text=Street+Breakfast"
+      imageUrl: "https://campuslife.telkomuniversity.ac.id/wp-content/uploads/2025/05/1747456036_INFO-BEASISWA-Deadline-31-Mei-2025-More.jpg"
     },
     interactions: {
       upvotes: 33,

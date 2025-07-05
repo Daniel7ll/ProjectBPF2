@@ -2,15 +2,15 @@ import React from 'react';
 
 const DiscussionRow = ({ discussion, onDiscussionClick }) => {
   const categoryColorClass = (() => {
-    switch (discussion.category.color) {
-      case 'red': return 'bg-red-100 text-red-700';
-      case 'pink': return 'bg-pink-100 text-pink-700';
-      case 'orange': return 'bg-orange-100 text-orange-700';
-      case 'blue': return 'bg-blue-100 text-blue-700';
-      case 'purple': return 'bg-purple-100 text-purple-700';
-      case 'green': return 'bg-green-100 text-green-700';
-      case 'gray': return 'bg-gray-100 text-gray-700';
-      default: return 'bg-gray-100 text-gray-700';
+    const color = discussion?.category?.color || 'gray'; // fallback jika null
+      switch (color) {
+        case 'red': return 'bg-red-100 text-red-700';
+        case 'pink': return 'bg-pink-100 text-pink-700';
+        case 'orange': return 'bg-orange-100 text-orange-700';
+        case 'blue': return 'bg-blue-100 text-blue-700';
+        case 'purple': return 'bg-purple-100 text-purple-700';
+        case 'green': return 'bg-green-100 text-green-700';
+        case 'gray': default: return 'bg-gray-100 text-gray-700';
     }
   })();
 
@@ -34,8 +34,9 @@ const DiscussionRow = ({ discussion, onDiscussionClick }) => {
       {/* Kategori */}
       <td className="px-6 py-4 whitespace-nowrap text-sm">
         <span className={`${categoryColorClass} px-3 py-1 rounded-full text-xs font-semibold`}>
-          {discussion.category.name}
+          {discussion.category?.name || 'TIDAK BERKATEGORI'}
         </span>
+
       </td>
 
       {/* Member */}

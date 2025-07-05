@@ -33,13 +33,16 @@ const ForumPage = () => {
     setSelectedDiscussion(null); // Reset diskusi yang dipilih setelah ditutup
   };
 
+const [searchTerm, setSearchTerm] = useState('');
+
+
   return (
     <div className="min-h-screen bg-gray-100 font-sans flex flex-col">
       <ForumHeader onToggleSidebar={toggleMenu} />
       <SideMenu isOpen={isMenuOpen} onClose={toggleMenu} />
 
       <div className="flex-grow container mx-auto px-4 py-6 flex flex-col">
-        <ForumSearchBar />
+        {/* <ForumSearchBar onSearch={setSearchTerm} /> */}
         
         <div className="flex-grow flex flex-col lg:flex-row gap-6 mt-6">
           <div className="w-full lg:w-3/4 flex flex-col gap-6">
@@ -49,7 +52,8 @@ const ForumPage = () => {
             </div>
             
             {/* Meneruskan fungsi openDiscussionModal ke DiscussionList */}
-            <DiscussionList onDiscussionClick={openDiscussionModal} /> 
+            <DiscussionList onDiscussionClick={openDiscussionModal} />
+
             
             {forumPosts.map(post => (
               <ForumPost key={post.id} post={post} />
