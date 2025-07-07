@@ -67,7 +67,7 @@ useEffect(() => {
             <div className="absolute top-full left-0 mt-2 w-full md:w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10">
               <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Semua Kategori</a>
               <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Internet Marketing</a>
-              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pemrograman Web</a>
+              <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Pemrograman Web</a> 
             </div>
           )}
         </div>
