@@ -7,6 +7,7 @@ import ForumPost from '../components/Forum/ForumPost';
 import SideMenu from '../components/Forum/SideMenu';
 import BannerSlideshow from '../components/Forum/BannerSlideshow';
 import DiscussionModal from '../components/Forum/DiscussionModal';
+import ForumFooter from '../components/Forum/ForumFooter';
 import { supabase } from '../lib/supabaseClient';
 import NewDiscussionModal from '../components/Forum/NewDiscussionModal'; // impor dulu
 
@@ -105,6 +106,7 @@ const closePostModal = () => setIsPostModalOpen(false);
         onClose={closeDiscussionModal}
         discussion={selectedDiscussion}
       />
+       <ForumFooter />
     </div>
   );
 };

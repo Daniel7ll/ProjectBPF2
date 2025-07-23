@@ -30,7 +30,7 @@ const ForumHeader = ({ onToggleSidebar }) => {
 
         {/* Tengah: Menu Navigasi */}
         <nav className="hidden md:flex space-x-8 text-black text-lg font-semibold flex-grow justify-center">
-          <a href="#" className="hover:text-[#2762AE] transition">HOME</a>
+          <a href="/" className="hover:text-[#2762AE] transition">HOME</a>
           <a href="#" className="hover:text-[#2762AE] transition">MEMBER</a>
           <a
             href="#"

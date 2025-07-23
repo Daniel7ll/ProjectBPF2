@@ -39,6 +39,7 @@ function App() {
           {/* 🌐 Forum Routes */}
           <Route element={<ForumLayout />}>
             <Route path="/" element={<Forum />} />
+      
           </Route>
 
           {/* 🔒 Protected Admin Routes */}
