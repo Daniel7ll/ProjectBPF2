@@ -1,0 +1,33 @@
+.breadcrumb {
+  background-color: #f1f1f1;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  margin-bottom: 40px;
+  border-radius: 4px;
+}
+
+.breadcrumb .container ul {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.breadcrumb .container ul li {
+  display: inline;
+}
+
+.breadcrumb .container ul li + li::before {
+  content: "/";
+  margin: 0 8px;
+  color: #888;
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #0056b3;
+  text-decoration: underline;
+}
