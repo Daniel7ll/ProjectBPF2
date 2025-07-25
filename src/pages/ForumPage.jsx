@@ -111,30 +111,39 @@ const ForumPage = () => {
               </div>
 
               {/* ⬇️ Berita Terbaru */}
-              <div className="bg-white p-4 rounded shadow">
-                <h2 className="text-xl font-semibold mb-4">Berita PCR Terbaru</h2>
-                {loadingNews ? (
-                  <p className="text-gray-500">Memuat berita...</p>
-                ) : newsList.length === 0 ? (
-                  <p className="text-gray-500">Belum ada berita.</p>
-                ) : (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {newsList.map((news) => (
-                      <div key={news.id} className="border rounded p-4 shadow-sm hover:shadow-md transition">
-                        {news.image && (
-                          <img
-                            src={news.image}
-                            alt={news.title}
-                            className="w-full h-40 object-cover rounded mb-2"
-                          />
-                        )}
-                        <h3 className="font-medium text-lg">{news.title}</h3>
-                        <p className="text-sm text-gray-600">{news.summary}</p>
+            <div className="bg-white rounded-2xl shadow-lg p-6 mb-10">
+              <h2 className="text-2xl font-bold text-blue-700 mb-6">📰 Berita PCR Terbaru</h2>
+              {loadingNews ? (
+                <p className="text-gray-500">Memuat berita...</p>
+              ) : newsList.length === 0 ? (
+                <p className="text-gray-500">Belum ada berita.</p>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {newsList.slice(0, 9).map((news) => (
+                    <div
+                      key={news.id}
+                      className="bg-gray-50 rounded-xl shadow hover:shadow-lg transition duration-300 overflow-hidden flex flex-col"
+                    >
+                      {news.image && (
+                        <img
+                          src={news.image}
+                          alt={news.title}
+                          className="w-full h-40 object-cover"
+                        />
+                      )}
+                      <div className="p-4 flex flex-col flex-grow">
+                        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                          {news.title}
+                        </h3>
+                        <p className="text-sm text-gray-600 flex-grow">{news.summary}</p>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+
 
 
               {/* Diskusi */}
