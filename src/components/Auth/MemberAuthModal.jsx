@@ -1,12 +1,8 @@
-// src/components/Auth/MemberAuthModal.jsx
 import React, { useState, useEffect } from 'react';
 import MemberLoginForm from './LoginMemberForm';
 import MemberRegisterForm from './RegisterMemberForm';
-<<<<<<< HEAD
 import logo from '../../assets/PCR-connect.png';
 import campusBg from '../../assets/rpc.jpg';
-=======
->>>>>>> 8f4c6301e7dbbfe3a70a5c3cf5250e9a5515120e
 
 const MemberAuthModal = ({ isOpen, onClose, mode = 'login' }) => {
   const [currentMode, setCurrentMode] = useState(mode);
@@ -18,7 +14,6 @@ const MemberAuthModal = ({ isOpen, onClose, mode = 'login' }) => {
   if (!isOpen) return null;
 
   return (
-<<<<<<< HEAD
     <div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cover bg-center animate-fadeIn"
       style={{
@@ -49,18 +44,10 @@ const MemberAuthModal = ({ isOpen, onClose, mode = 'login' }) => {
         <button
           onClick={onClose}
           className="absolute top-4 right-4 text-white/80 hover:text-white text-2xl"
-=======
-    <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center">
-      <div className="bg-white p-6 rounded-lg w-full max-w-md relative">
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-3 text-gray-500 text-xl font-bold"
->>>>>>> 8f4c6301e7dbbfe3a70a5c3cf5250e9a5515120e
         >
           &times;
         </button>
 
-<<<<<<< HEAD
         {/* Konten */}
         <div className="mt-16 space-y-6 text-white">
           <div className="text-center">
@@ -76,35 +63,33 @@ const MemberAuthModal = ({ isOpen, onClose, mode = 'login' }) => {
 
           <div className="p-6 rounded-xl bg-white/10 backdrop-blur-md shadow-md border border-white/30 space-y-4">
             {currentMode === 'login' ? (
-              <MemberLoginForm onClose={onClose} />
+              <>
+                <MemberLoginForm onClose={onClose} />
+                <p className="text-sm text-center text-white/80 mt-4">
+                  Belum punya akun?{' '}
+                  <button
+                    className="font-semibold text-white hover:text-blue-200 transition"
+                    onClick={() => setCurrentMode('register')}
+                  >
+                    Daftar di sini
+                  </button>
+                </p>
+              </>
             ) : (
-              <MemberRegisterForm onClose={onClose} />
+              <>
+                <MemberRegisterForm onClose={onClose} />
+                <p className="text-sm text-center text-white/80 mt-4">
+                  Sudah punya akun?{' '}
+                  <button
+                    className="font-semibold text-white hover:text-blue-200 transition"
+                    onClick={() => setCurrentMode('login')}
+                  >
+                    Login di sini
+                  </button>
+                </p>
+              </>
             )}
           </div>
-
-          <p className="text-sm text-center text-white/80">
-            {currentMode === 'login' ? (
-              <>
-                Belum punya akun?{' '}
-                <button
-                  className="font-semibold text-white hover:text-blue-200 transition"
-                  onClick={() => setCurrentMode('register')}
-                >
-                  Daftar di sini
-                </button>
-              </>
-            ) : (
-              <>
-                Sudah punya akun?{' '}
-                <button
-                  className="font-semibold text-white hover:text-blue-200 transition"
-                  onClick={() => setCurrentMode('login')}
-                >
-                  Login di sini
-                </button>
-              </>
-            )}
-          </p>
         </div>
       </div>
 
@@ -135,36 +120,6 @@ const MemberAuthModal = ({ isOpen, onClose, mode = 'login' }) => {
           animation: slideUp 0.5s ease-out forwards;
         }
       `}</style>
-=======
-        {currentMode === 'login' ? (
-          <>
-            <MemberLoginForm onClose={onClose} />
-            <p className="text-sm mt-4 text-center">
-              Belum punya akun?{' '}
-              <button
-                className="text-blue-600 underline"
-                onClick={() => setCurrentMode('register')}
-              >
-                Daftar Member
-              </button>
-            </p>
-          </>
-        ) : (
-          <>
-            <MemberRegisterForm onClose={onClose} />
-            <p className="text-sm mt-4 text-center">
-              Sudah punya akun?{' '}
-              <button
-                className="text-blue-600 underline"
-                onClick={() => setCurrentMode('login')}
-              >
-                Login Member
-              </button>
-            </p>
-          </>
-        )}
-      </div>
->>>>>>> 8f4c6301e7dbbfe3a70a5c3cf5250e9a5515120e
     </div>
   );
 };
