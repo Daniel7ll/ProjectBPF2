@@ -20,6 +20,10 @@ const Guest = React.lazy(() => import("./pages/Guest"));
 const Forum = React.lazy(() => import("./pages/ForumPage"));
 const AdminDashboard = React.lazy(() => import("./pages/Admin/AdminDasboard"));
 const AdminDiskusi = React.lazy(() => import("./pages/Admin/AdminDiskusi"));
+const NewsManager = React.lazy(() => import("./components/Admin/NewsManager")); 
+
+import AccountLayout from './layouts/AccountLayout'; 
+const AccountPage = React.lazy(() => import("./pages/AccountPage"));
 
 function App() {
   // Anda tidak perlu lagi mengambil user dari localStorage di sini.
@@ -39,7 +43,11 @@ function App() {
           {/* 🌐 Forum Routes */}
           <Route element={<ForumLayout />}>
             <Route path="/" element={<Forum />} />
-      
+          
+          </Route>
+          
+          <Route element={<AccountLayout />}>
+            <Route path="/account" element={<AccountPage />} />
           </Route>
 
           {/* 🔒 Protected Admin Routes */}
@@ -55,6 +63,7 @@ function App() {
             <Route path="/admin/diskusi" element={<AdminDiskusi />} />
             <Route path="/admins" element={<AdminsPage />} />
             <Route path="/member" element={<MembersTable />} />
+            <Route path="/news" element={<NewsManager />} />
           </Route>
 
         </Routes>

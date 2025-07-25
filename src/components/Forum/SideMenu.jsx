@@ -45,10 +45,10 @@ const SideMenu = ({ isOpen, onClose }) => {
 
             {/* Menu Navigasi */}
             <ul className="space-y-4">
-              <li><a href="#home" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Home</a></li>
-              <li><a href="#about" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Member</a></li>
-              <li><a href="#services" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Login Admin</a></li>
-              <li><a href="#faq" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Tentang Forum</a></li>
+              <li><a href="/" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Home</a></li>
+              <li><a href="/account" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Member</a></li>
+              <li><a href="/admin" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Login Admin</a></li>
+              <li><a href="/guest" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Tentang Forum</a></li>
               {/* <li><a href="#blog" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Blog</a></li>
               <li><a href="#testimonial" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Testimonial</a></li>
               <li><a href="#contact" onClick={onClose} className="block text-gray-800 hover:text-blue-600 text-lg font-medium transition-colors">Contact Us</a></li> */}

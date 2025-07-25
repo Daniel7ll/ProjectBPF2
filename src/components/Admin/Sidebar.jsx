@@ -6,6 +6,7 @@ import {
   FaUsers,
   FaCog,
   FaSignOutAlt,
+  FaNewspaper, // ✅ ikon berita
 } from "react-icons/fa";
 import PCRLogo from "../../assets/logo.jpg"; // logo PNG transparan
 
@@ -18,7 +19,7 @@ const Sidebar = () => {
         <img
           src={PCRLogo}
           alt="PCR CONNECT"
-          className="w-56 object-contain" // lebih besar & nempel kiri
+          className="w-56 object-contain"
         />
       </div>
 
@@ -42,6 +43,15 @@ const Sidebar = () => {
         >
           <FaUsers className="text-xl" /> Members
         </Link>
+
+        {/* ✅ Tambahan link ke News Manager */}
+        <Link
+          to="/news"
+          className="flex items-center gap-3 hover:bg-blue-100 px-2 py-2 rounded-lg transition"
+        >
+          <FaNewspaper className="text-xl" /> News Manager
+        </Link>
+
         <Link
           to="/settings"
           className="flex items-center gap-3 hover:bg-blue-100 px-2 py-2 rounded-lg transition"
