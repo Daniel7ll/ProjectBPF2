@@ -2,80 +2,81 @@ import React, { useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import AdminLoginModal from '../Auth/AuthModal';
 import MemberAuthModal from '../Auth/MemberAuthModal';
-import { useAuth } from '../../assets/contexts/AuthContext'; // ⬅️ pastikan ini
+import { useAuth } from '../../assets/contexts/AuthContext';
 
 const ForumHeader = ({ onToggleSidebar }) => {
   const [adminModalOpen, setAdminModalOpen] = useState(false);
   const [memberModalOpen, setMemberModalOpen] = useState(false);
 
-  const { user, logout } = useAuth(); // ⬅️ akses user dan logout dari context
+  const { user, logout } = useAuth();
 
   return (
-    <header className="w-full bg-white shadow-md sticky top-0 z-50 border-b-2">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-        {/* Kiri: Logo + Toggle */}
-        <div className="flex items-center">
+    <header className="w-full bg-white shadow-md sticky top-0 z-50 border-b border-gray-200">
+      <div className="max-w-screen-xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Kiri: Logo + Menu Button */}
+        <div className="flex items-center gap-4">
           <button
             onClick={onToggleSidebar}
-            className="p-2 rounded-lg bg-gray-100 hover:bg-gray-200 transition-colors mr-4"
-            aria-label="Toggle navigation menu"
+            className="p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition"
+            aria-label="Toggle Sidebar"
           >
-            <HiMenu className="w-6 h-6 text-gray-700" />
+            <HiMenu className="w-7 h-7 text-gray-700" />
           </button>
 
-          <div className="text-3xl font-bold text-black tracking-wide">
-            <img src="src/assets/PCR-connect.png" alt="Forum Logo" className="h-18 w-40 inline-block" />
+          <div className="flex items-center">
+            <img
+              src="src/assets/PCR-connect.png"
+              alt="Forum Logo"
+              className="h-12 w-auto object-contain"
+            />
+            <span className="ml-2 text-2xl font-bold text-[#2762AE] hidden sm:inline">PCR Connect</span>
           </div>
         </div>
 
-        {/* Tengah: Menu Navigasi */}
-        <nav className="hidden md:flex space-x-8 text-black text-lg font-semibold flex-grow justify-center">
-          <a href="/" className="hover:text-[#2762AE] transition">HOME</a>
-          {/* <a href="#" className="hover:text-[#2762AE] transition">MEMBER</a> */}
-          <a
-            href="#"
+        {/* Tengah: Navigation Links */}
+        <nav className="hidden md:flex items-center space-x-8 text-[17px] font-semibold text-gray-700">
+          <a href="/" className="hover:text-[#2762AE] transition">Beranda</a>
+          <a href="/account" className="hover:text-[#2762AE] transition">Akun</a>
+          <button
             onClick={() => setAdminModalOpen(true)}
             className="hover:text-[#2762AE] transition"
           >
             Login Admin
-          </a>
-          <a href="/guest" className="hover:text-[#2762AE] transition">TENTANG FORUM</a>
+          </button>
+          <a href="/guest" className="hover:text-[#2762AE] transition">Tentang Forum</a>
         </nav>
 
         {/* Kanan: Login/Logout Member */}
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center gap-4">
           {!user ? (
             <button
               onClick={() => setMemberModalOpen(true)}
-              className="px-6 py-2 border-2 border-gray-300 rounded-full text-md font-semibold text-black hover:bg-blue-500 hover:text-white transition flex items-center"
+              className="flex items-center gap-2 px-6 py-2 border border-gray-300 rounded-full text-base font-medium text-gray-800 hover:bg-blue-600 hover:text-white transition"
             >
-              <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"></path>
               </svg>
-              Login / Daftar Member
+              Login / Daftar
             </button>
           ) : (
             <>
-              <span className="text-md font-medium text-gray-700">
+              <span className="text-base text-gray-700 font-medium hidden sm:inline">
                 👤 {user.username || user.email}
               </span>
               <button
-                onClick={() => {
-                  console.log("Logout button clicked");
-                  logout();
-                }}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-semibold rounded"
+                onClick={logout}
+                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded text-sm font-semibold transition"
               >
                 Logout
               </button>
             </>
           )}
         </div>
-
-        {/* Modal Login Admin & Member */}
-        <AdminLoginModal isOpen={adminModalOpen} onClose={() => setAdminModalOpen(false)} />
-        <MemberAuthModal isOpen={memberModalOpen} onClose={() => setMemberModalOpen(false)} />
       </div>
+
+      {/* Modals */}
+      <AdminLoginModal isOpen={adminModalOpen} onClose={() => setAdminModalOpen(false)} />
+      <MemberAuthModal isOpen={memberModalOpen} onClose={() => setMemberModalOpen(false)} />
     </header>
   );
 };

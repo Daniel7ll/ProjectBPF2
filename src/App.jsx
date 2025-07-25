@@ -22,6 +22,9 @@ const AdminDashboard = React.lazy(() => import("./pages/Admin/AdminDasboard"));
 const AdminDiskusi = React.lazy(() => import("./pages/Admin/AdminDiskusi"));
 const NewsManager = React.lazy(() => import("./components/Admin/NewsManager")); 
 
+import AccountLayout from './layouts/AccountLayout'; 
+const AccountPage = React.lazy(() => import("./pages/AccountPage"));
+
 function App() {
   // Anda tidak perlu lagi mengambil user dari localStorage di sini.
   // Logika ini sekarang harusnya ada di dalam AuthProvider.
@@ -40,7 +43,11 @@ function App() {
           {/* 🌐 Forum Routes */}
           <Route element={<ForumLayout />}>
             <Route path="/" element={<Forum />} />
-      
+          
+          </Route>
+          
+          <Route element={<AccountLayout />}>
+            <Route path="/account" element={<AccountPage />} />
           </Route>
 
           {/* 🔒 Protected Admin Routes */}
