@@ -4,7 +4,7 @@ import {
   createNews,
   updateNews,
   deleteNews,
-} from "../../lib/newsService"; 
+} from "../../lib/newsService";
 
 const NewsManager = () => {
   const [newsList, setNewsList] = useState([]);
@@ -15,6 +15,7 @@ const NewsManager = () => {
     image: "",
   });
   const [editingId, setEditingId] = useState(null);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     fetchNews();
@@ -25,10 +26,16 @@ const NewsManager = () => {
       setLoading(true);
       const data = await getAllNews();
       setNewsList(data);
-      setLoading(false);
     } catch (err) {
       console.error("Error loading news:", err.message);
+    } finally {
+      setLoading(false);
     }
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -36,14 +43,17 @@ const NewsManager = () => {
     try {
       if (editingId) {
         await updateNews(editingId, formData);
+        setStatus("✅ Berita berhasil diupdate.");
       } else {
         await createNews(formData);
+        setStatus("✅ Berita berhasil ditambahkan.");
       }
       setFormData({ title: "", summary: "", image: "" });
       setEditingId(null);
       fetchNews();
     } catch (err) {
       console.error("Submit error:", err.message);
+      setStatus("❌ Gagal menyimpan berita.");
     }
   };
 
@@ -54,97 +64,117 @@ const NewsManager = () => {
       image: news.image,
     });
     setEditingId(news.id);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id) => {
     if (window.confirm("Yakin ingin menghapus berita ini?")) {
       try {
         await deleteNews(id);
+        setStatus("✅ Berita berhasil dihapus.");
         fetchNews();
       } catch (err) {
         console.error("Delete error:", err.message);
+        setStatus("❌ Gagal menghapus berita.");
       }
     }
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto">
-      <h2 className="text-2xl font-bold mb-4">
-        {editingId ? "Edit Berita" : "Tambah Berita"}
-      </h2>
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-4 rounded shadow space-y-4 mb-8"
-      >
-        <input
-          type="text"
-          placeholder="Judul"
-          className="w-full border p-2 rounded"
-          value={formData.title}
-          onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-          required
-        />
-        <textarea
-          placeholder="Ringkasan"
-          className="w-full border p-2 rounded"
-          rows={3}
-          value={formData.summary}
-          onChange={(e) =>
-            setFormData({ ...formData, summary: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="URL Gambar"
-          className="w-full border p-2 rounded"
-          value={formData.image}
-          onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-        />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          {editingId ? "Simpan Perubahan" : "Tambah Berita"}
-        </button>
-      </form>
+    <div className="p-6 font-sans ml-64 bg-[#f0f2f5] min-h-screen">
+      <div className="max-w-4xl mx-auto">
+        <h1 className="text-3xl font-extrabold text-center bg-gradient-to-r from-[#1877F2] to-[#0b5ed7] text-transparent bg-clip-text drop-shadow mb-6">
+          📰 {editingId ? "Edit Berita" : "Tambah Berita"}
+        </h1>
 
-      <h2 className="text-xl font-semibold mb-4">Daftar Berita</h2>
-      {loading ? (
-        <p>Memuat berita...</p>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {newsList.map((news) => (
-            <div
-              key={news.id}
-              className="bg-white p-4 rounded shadow space-y-2 relative"
-            >
-              {news.image && (
-                <img
-                  src={news.image}
-                  alt={news.title}
-                  className="w-full h-32 object-cover rounded"
-                />
-              )}
-              <h3 className="text-lg font-medium">{news.title}</h3>
-              <p className="text-sm text-gray-600">{news.summary}</p>
-              <div className="flex justify-end space-x-2 mt-2">
-                <button
-                  onClick={() => handleEdit(news)}
-                  className="px-3 py-1 text-sm bg-yellow-400 text-white rounded"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDelete(news.id)}
-                  className="px-3 py-1 text-sm bg-red-500 text-white rounded"
-                >
-                  Hapus
-                </button>
+        <form
+          onSubmit={handleSubmit}
+          className="bg-white p-6 rounded-xl shadow-md border border-blue-200 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+        >
+          <input
+            type="text"
+            name="title"
+            placeholder="Judul"
+            value={formData.title}
+            onChange={handleInputChange}
+            className="border border-blue-300 p-3 rounded-xl"
+            required
+          />
+          <input
+            type="text"
+            name="summary"
+            placeholder="Ringkasan"
+            value={formData.summary}
+            onChange={handleInputChange}
+            className="border border-blue-300 p-3 rounded-xl"
+          />
+          <input
+            type="text"
+            name="image"
+            placeholder="URL Gambar (opsional)"
+            value={formData.image}
+            onChange={handleInputChange}
+            className="border border-blue-300 p-3 rounded-xl md:col-span-2"
+          />
+          <button
+            type="submit"
+            className="bg-[#1877F2] hover:bg-blue-600 text-white font-semibold px-5 py-3 rounded-xl transition duration-300 md:col-span-2"
+          >
+            {editingId ? "Simpan Perubahan" : "Tambah Berita"}
+          </button>
+        </form>
+
+        {status && (
+          <p
+            className={`text-center mb-4 font-medium ${
+              status.includes("Gagal") ? "text-red-600" : "text-green-600"
+            }`}
+          >
+            {status}
+          </p>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {loading ? (
+            <p className="col-span-full text-center">Memuat berita...</p>
+          ) : newsList.length === 0 ? (
+            <p className="col-span-full text-center text-gray-500 italic">
+              Belum ada berita.
+            </p>
+          ) : (
+            newsList.map((news) => (
+              <div
+                key={news.id}
+                className="bg-white p-4 rounded-xl shadow-md border border-blue-100 space-y-2"
+              >
+                {news.image && (
+                  <img
+                    src={news.image}
+                    alt={news.title}
+                    className="w-full h-40 object-cover rounded"
+                  />
+                )}
+                <h3 className="text-lg font-bold">{news.title}</h3>
+                <p className="text-sm text-gray-600">{news.summary}</p>
+                <div className="flex justify-end gap-2 mt-2">
+                  <button
+                    onClick={() => handleEdit(news)}
+                    className="text-sm px-4 py-2 bg-yellow-400 text-white rounded hover:bg-yellow-500"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(news.id)}
+                    className="text-sm px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+                  >
+                    Hapus
+                  </button>
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };

@@ -38,29 +38,26 @@ export default function EditProfile() {
     const { data: user } = await supabase.auth.getUser();
 
     if (user?.user) {
-      const updates = {
-        name: adminData.name,
-      };
+      const updates = { name: adminData.name };
 
       const { error } = await supabase
         .from("admins")
         .update(updates)
         .eq("id", user.user.id);
 
-      // Update password jika diisi
       if (password) {
         const { error: passError } = await supabase.auth.updateUser({
           password,
         });
         if (passError) {
-          setMessage("Gagal update password.");
+          setMessage("❌ Gagal update password.");
         }
       }
 
       if (error) {
-        setMessage("Gagal update profil.");
+        setMessage("❌ Gagal update profil.");
       } else {
-        setMessage("Profil berhasil diperbarui.");
+        setMessage("✅ Profil berhasil diperbarui.");
       }
     }
 
@@ -68,61 +65,61 @@ export default function EditProfile() {
   };
 
   return (
-    <div className="ml-64 p-8 min-h-screen bg-gradient-to-tr from-[#f0f8ff] to-white font-sans">
-      <div className="max-w-xl mx-auto bg-white/70 backdrop-blur-md p-8 rounded-xl shadow-lg border border-blue-100">
-        <h2 className="text-2xl font-bold mb-6 text-blue-800">Edit Profile Admin</h2>
+    <div className="p-6 font-sans ml-64 bg-[#f0f2f5] min-h-screen">
+      <div className="max-w-2xl mx-auto">
+        <h1 className="text-3xl font-extrabold text-center bg-gradient-to-r from-[#1877F2] to-[#0b5ed7] text-transparent bg-clip-text drop-shadow mb-6">
+          👤 Edit Profil Admin
+        </h1>
 
-        <form onSubmit={handleUpdate} className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nama Lengkap
-            </label>
-            <input
-              type="text"
-              value={adminData.name}
-              onChange={(e) => setAdminData({ ...adminData, name: e.target.value })}
-              className="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring focus:ring-blue-100"
-              required
-            />
-          </div>
+        <form
+          onSubmit={handleUpdate}
+          className="bg-white p-6 rounded-xl shadow-md border border-blue-200 grid grid-cols-1 gap-4"
+        >
+          <input
+            type="text"
+            placeholder="Nama Lengkap"
+            value={adminData.name}
+            onChange={(e) =>
+              setAdminData({ ...adminData, name: e.target.value })
+            }
+            className="border border-blue-300 p-3 rounded-xl"
+            required
+          />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email (tidak dapat diubah)
-            </label>
-            <input
-              type="email"
-              value={adminData.email}
-              disabled
-              className="w-full px-4 py-2 bg-gray-100 border border-blue-200 rounded-lg"
-            />
-          </div>
+          <input
+            type="email"
+            placeholder="Email (tidak dapat diubah)"
+            value={adminData.email}
+            disabled
+            className="bg-gray-100 border border-blue-200 p-3 rounded-xl text-gray-600 cursor-not-allowed"
+          />
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Ubah Password
-            </label>
-            <input
-              type="password"
-              placeholder="Kosongkan jika tidak ingin mengubah"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border border-blue-200 rounded-lg shadow-sm focus:ring focus:ring-blue-100"
-            />
-          </div>
+          <input
+            type="password"
+            placeholder="Ubah Password (opsional)"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="border border-blue-300 p-3 rounded-xl"
+          />
 
           <button
             type="submit"
             disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition"
+            className="bg-[#1877F2] hover:bg-blue-600 text-white font-semibold px-5 py-3 rounded-xl transition duration-300"
           >
             {loading ? "Menyimpan..." : "Simpan Perubahan"}
           </button>
-
-          {message && (
-            <p className="mt-4 text-sm text-green-600 font-medium">{message}</p>
-          )}
         </form>
+
+        {message && (
+          <p
+            className={`text-center mt-4 font-medium ${
+              message.includes("❌") ? "text-red-600" : "text-green-600"
+            }`}
+          >
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );

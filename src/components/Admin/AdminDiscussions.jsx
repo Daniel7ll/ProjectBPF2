@@ -131,13 +131,13 @@ export default function AdminDiscussions() {
   return (
     <div className="p-6 font-sans ml-64 bg-[#f0f2f5] min-h-screen">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-extrabold text-center mb-6">
+        <h1 className="text-3xl font-extrabold text-[#0e175f] text-center mb-6">
           💬 {editingDiscussion ? 'Edit Diskusi' : 'Tambah Diskusi'}
         </h1>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white p-6 rounded-xl shadow-md border border-blue-200 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4"
+          className="bg-white p-6 rounded-2xl shadow-md border border-blue-200 mb-8 grid grid-cols-1 md:grid-cols-2 gap-4"
         >
           {Object.keys(formData).map((key) => (
             <input
@@ -147,7 +147,7 @@ export default function AdminDiscussions() {
               placeholder={key.replace('_', ' ').toUpperCase()}
               value={formData[key] || ''}
               onChange={handleInputChange}
-              className="border border-blue-300 p-3 rounded-xl"
+              className="border border-blue-300 p-3 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
               disabled={key === 'id' && !!editingDiscussion}
             />
           ))}
@@ -165,21 +165,21 @@ export default function AdminDiscussions() {
           </p>
         )}
 
-        <div className="overflow-x-auto bg-white shadow-md rounded-xl border border-blue-100">
-          <table className="min-w-full table-auto">
-            <thead className="bg-blue-50 text-blue-800 text-left text-sm uppercase">
+        <div className="overflow-x-auto bg-white shadow-md rounded-2xl border border-blue-100">
+          <table className="min-w-full table-auto text-sm">
+            <thead className="bg-blue-50 text-blue-800 text-left uppercase">
               <tr>
                 {Object.keys(formData).map((k) => (
-                  <th key={k} className="px-4 py-3">{k.toUpperCase()}</th>
+                  <th key={k} className="px-4 py-3">{k.replace('_', ' ')}</th>
                 ))}
-                <th className="px-4 py-3">AKSI</th>
+                <th className="px-4 py-3">Aksi</th>
               </tr>
             </thead>
             <tbody>
               {discussions.map((d, idx) => (
                 <tr key={d.id} className={idx % 2 === 0 ? 'bg-white' : 'bg-blue-50'}>
                   {Object.keys(formData).map((k) => (
-                    <td key={k} className="px-4 py-2 border-t text-sm">{d[k]}</td>
+                    <td key={k} className="px-4 py-2 border-t">{d[k]}</td>
                   ))}
                   <td className="px-4 py-2 border-t flex gap-2">
                     <button onClick={() => handleEdit(d)} className="text-blue-600 hover:text-blue-800">

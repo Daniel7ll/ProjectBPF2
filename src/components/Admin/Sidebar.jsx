@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import {
   FaTachometerAlt,
   FaUserShield,
@@ -8,6 +8,8 @@ import {
   FaSignOutAlt,
   FaNewspaper,
 } from "react-icons/fa";
+import { GoCommentDiscussion } from "react-icons/go";
+import { GiPostOffice, GiVerticalBanner } from "react-icons/gi";
 import PCRLogo from "../../assets/logo.jpg";
 
 // Komponen link sidebar dengan active style
@@ -56,6 +58,31 @@ const Sidebar = () => {
           <SidebarLink to="/member" icon={<FaUsers />}>Members</SidebarLink>
           <SidebarLink to="/news" icon={<FaNewspaper />}>News Manager</SidebarLink>
           <SidebarLink to="/settings" icon={<FaCog />}>Settings</SidebarLink>
+
+          {/* Tambahan menu lain */}
+          <Link
+            to="/discussions"
+            className="flex items-center gap-3 hover:bg-blue-100 px-3 py-2 rounded-lg transition text-[#0e175f]"
+          >
+            <GoCommentDiscussion className="text-xl" />
+            Discussions
+          </Link>
+
+          <Link
+            to="/forumPosts"
+            className="flex items-center gap-3 hover:bg-blue-100 px-3 py-2 rounded-lg transition text-[#0e175f]"
+          >
+            <GiPostOffice className="text-xl" />
+            Forum Posts
+          </Link>
+
+          <Link
+            to="/banners"
+            className="flex items-center gap-3 hover:bg-blue-100 px-3 py-2 rounded-lg transition text-[#0e175f]"
+          >
+            <GiVerticalBanner className="text-xl" />
+            Banners
+          </Link>
         </nav>
       </div>
 
